@@ -38,3 +38,48 @@ first.addEventListener("click", function() {
     }
 })
 
+second.addEventListener("click", function() {
+    var answers = [["1right", "wrong", "wrong", "wrong"], ["2right", "wrong", "wrong", "wrong"], ["3right", "wrong", "wrong", "wrong"], ["4right", "wrong", "wrong", "wrong"]];
+    let firstchoice = document.getElementById("second")
+    console.log(firstchoice.textContent)
+    console.log(answers[n][0])
+    if (firstchoice.textContent  == answers[n][0]){
+        document.getElementById("results").style.display = "block"
+        document.getElementById("wl").textContent = "good job"
+    }
+    else{
+        document.getElementById("results").style.display = "block"
+        document.getElementById("wl").textContent = "you suck"
+    }
+})
+
+third.addEventListener("click", function() {
+    var answers = [["1right", "wrong", "wrong", "wrong"], ["2right", "wrong", "wrong", "wrong"], ["3right", "wrong", "wrong", "wrong"], ["4right", "wrong", "wrong", "wrong"]];
+    let firstchoice = document.getElementById("third")
+    console.log(firstchoice.textContent)
+    console.log(answers[n][0])
+    if (firstchoice.textContent  == answers[n][0]){
+        document.getElementById("results").style.display = "block"
+        document.getElementById("wl").textContent = "good job"
+    }
+    else{
+        document.getElementById("results").style.display = "block"
+        document.getElementById("wl").textContent = "you suck"
+    }
+})
+
+fourth.addEventListener("click", function() {
+    var answers = [["1right", "wrong", "wrong", "wrong"], ["2right", "wrong", "wrong", "wrong"], ["3right", "wrong", "wrong", "wrong"], ["4right", "wrong", "wrong", "wrong"]];
+    let firstchoice = document.getElementById("fourth")
+    console.log(firstchoice.textContent)
+    console.log(answers[n][0])
+    if (firstchoice.textContent  == answers[n][0]){
+        document.getElementById("results").style.display = "block"
+        document.getElementById("wl").textContent = "good job"
+    }
+    else{
+        document.getElementById("results").style.display = "block"
+        document.getElementById("wl").textContent = "you suck"
+    }
+}) 
+
