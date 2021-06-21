@@ -10,10 +10,11 @@ var question = document.getElementById("question")
 let n = Math.floor(Math.random() * questionarray.length);
 let score =0;
 let scoresignal = false;
+let timesignal = false;
 let i=0;
 let newgame=true;
 var timeEl = document.getElementById("time")
-var secondsLeft = 10
+var secondsLeft = 30
 let stoptime = false;
 
 
@@ -38,6 +39,10 @@ function play() {
     document.getElementById("fourth").textContent = answers[i][3];
     question.textContent = chosenq;
     scoresignal = false;
+    if(timesignal){
+        secondsLeft=secondsLeft-3;
+    }
+
     if (newgame) {
         stoptime = false;
         setTime()
@@ -62,6 +67,7 @@ function choice1() {
         else {
             document.getElementById("results").style.display = "block"
             document.getElementById("wl").textContent = "you suck"
+            timesignal = true;
         }
         nextquestion()
     } 
@@ -81,6 +87,7 @@ function choice2() {
         else {
             document.getElementById("results").style.display = "block"
             document.getElementById("wl").textContent = "you suck"
+            timesignal = true;
         }
         nextquestion()
     }
@@ -99,6 +106,7 @@ function choice3() {
         else {
             document.getElementById("results").style.display = "block"
             document.getElementById("wl").textContent = "you suck"
+            timesignal = true;
         }
         nextquestion();
     } 
@@ -118,6 +126,7 @@ function choice4() {
         else {
             document.getElementById("results").style.display = "block"
             document.getElementById("wl").textContent = "you suck"
+            timesignal = true;
         }
         nextquestion();
     } 
@@ -143,13 +152,13 @@ function nextquestion() {
 
 function endgame(){
     stoptime = true;
-    secondsLeft = 10;
+    secondsLeft = 30;
     question.textContent="You're done. Score: " + score;
     document.getElementById("list").style.display = "none";
     document.getElementById("username").style.display = "block"
     score = 0;
     newgame = true;
-    timeEl.style.display = "none"
+    // timeEl.style.display = "none"
     // play();
 }
 
@@ -157,6 +166,7 @@ function setTime() {
     // Sets interval in variable
     var timerInterval = setInterval(function() {
       secondsLeft--;
+   
       timeEl.textContent = secondsLeft + " seconds left.";
   
       if(secondsLeft === 0) {
