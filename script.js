@@ -5,14 +5,20 @@ document.getElementById("list").style.display = "none"
 document.getElementById("results").style.display = "none"
 var question = document.getElementById("question")
 let n = Math.floor(Math.random() * questionarray.length);
-
+let newgame=false
+let i=0;
  
 playgame.addEventListener("click", play)
 function play() { 
+    // if (newgame){
+    //     newgame = false
+    //     var questionarray = ["1what does html stand for?", "2is joe biden a fascist?", "3wanna bomb the capitol?", "4I am sad"];
+    // }
     document.getElementById("playgame").style.display = "none";
     console.log(questionarray)
+    console.log(i)
     console.log(answers[n])
-    chosenq = questionarray[n];
+    chosenq = questionarray[i];
     answers[n] = answers[n].sort(() => Math.random() - 0.5);
     console.log(answers[n])
     document.getElementById("list").style.display = "block";
@@ -104,21 +110,43 @@ next.addEventListener("click", nextquestion)
 function nextquestion() {
     // var questionarray = ["1what does html stand for?", "2is joe biden a fascist?", "3wanna bomb the capitol?", "4I am sad"]; 
     document.getElementById("results").style.display = "none"
-    console.log(questionarray)
-    console.log(n)
-    questionarray.splice(n,1)
-    console.log(questionarray)
-    if (questionarray.length>2){
-    n = Math.floor(Math.random() * questionarray.length);
-    }
-    else if(questionarray.length=2){
-        n=0
-    }
-    else if(questionarray.length=1){
-        n=0
-    }
-    else{
+    console.log(i)
+    i++
+    if(i==4){
+        i=0
 
     }
+    console.log(i)
     play()
- }
+}
+
+function Endgame(){
+    question.textContent="You're done bitch"
+    document.getElementById("list").style.display = "none"
+}
+
+
+
+
+    // console.log(questionarray)
+    // console.log(n)
+    // questionarray.splice(n,1)
+    // console.log(questionarray.length)
+    // console.log(questionarray)
+    // if (questionarray.length>2){
+    //     play()
+    // n = Math.floor(Math.random() * questionarray.length);
+    // }
+    // else if(questionarray.length<=2 && questionarray>0){
+    //     console.log("length2")
+    //     n=0
+    //     play()
+    // }
+    // else {
+    //     console.log("length???")
+    //     n = Math.floor(Math.random() * questionarray.length)
+    //     questionarray = ["1what does html stand for?", "2is joe biden a fascist?", "3wanna bomb the capitol?", "4I am sad"]; 
+    //     play()
+    // }
+    
+ 
