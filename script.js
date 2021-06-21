@@ -40,7 +40,7 @@ function play() {
     scoresignal = false;
     if (newgame) {
         stoptime = false;
-        // setTime()
+        setTime()
     }
 }
 
@@ -144,32 +144,33 @@ function nextquestion() {
 function endgame(){
     stoptime = true;
     secondsLeft = 10;
-    question.textContent="You're done bitch. Score: "+score;
+    question.textContent="You're done. Score: " + score;
     document.getElementById("list").style.display = "none";
     document.getElementById("username").style.display = "block"
     score = 0;
     newgame = true;
+    timeEl.style.display = "none"
     // play();
 }
 
-// function setTime() {
-//     // Sets interval in variable
-//     var timerInterval = setInterval(function() {
-//       secondsLeft--;
-//       timeEl.textContent = secondsLeft + " seconds left.";
+function setTime() {
+    // Sets interval in variable
+    var timerInterval = setInterval(function() {
+      secondsLeft--;
+      timeEl.textContent = secondsLeft + " seconds left.";
   
-//       if(secondsLeft === 0) {
-//         // Stops execution of action at set interval
-//         clearInterval(timerInterval);
-//         // Calls function to create and append image
-//         return endgame();
-//       }
-//       if(stoptime){
-//         return clearInterval(timerInterval)
-//       }
+      if(secondsLeft === 0) {
+        // Stops execution of action at set interval
+        clearInterval(timerInterval);
+        // Calls function to create and append image
+        return endgame();
+      }
+      if(stoptime){
+        clearInterval(timerInterval)
+      }
   
-//     }, 1000);
-//   }
+    }, 1000);
+  }
 
 
 
