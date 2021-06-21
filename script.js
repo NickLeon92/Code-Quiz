@@ -5,11 +5,18 @@ var answers = [["1right", "wrong", "wrong", "wrong"], ["2right", "wrong", "wrong
 var choices = document.querySelectorAll("li")
 document.getElementById("list").style.display = "none"
 document.getElementById("results").style.display = "none"
+document.getElementById("username").style.display = "none"
 var question = document.getElementById("question")
 let n = Math.floor(Math.random() * questionarray.length);
 let score =0;
 let scoresignal = false;
 let i=0;
+let newgame=true;
+var timeEl = document.getElementById("time")
+var secondsLeft = 10
+let stoptime = false;
+
+
  
 playgame.addEventListener("click", play)
 function play() { 
@@ -22,15 +29,19 @@ function play() {
     console.log(i)
     console.log(answers[n])
     chosenq = questionarray[i];
-    answers[n] = answers[n].sort(() => Math.random() - 0.5);
+    answers[i] = answers[i].sort(() => Math.random() - 0.5);
     console.log(answers[n])
     document.getElementById("list").style.display = "block";
-    document.getElementById("first").textContent = answers[n][0];
-    document.getElementById("second").textContent = answers[n][1];
-    document.getElementById("third").textContent = answers[n][2];
-    document.getElementById("fourth").textContent = answers[n][3];
+    document.getElementById("first").textContent = answers[i][0];
+    document.getElementById("second").textContent = answers[i][1];
+    document.getElementById("third").textContent = answers[i][2];
+    document.getElementById("fourth").textContent = answers[i][3];
     question.textContent = chosenq;
     scoresignal = false;
+    if (newgame) {
+        stoptime = false;
+        // setTime()
+    }
 }
 
 // var answers = [["1right", "wrong", "wrong", "wrong"], ["2right", "wrong", "wrong", "wrong"], ["3right", "wrong", "wrong", "wrong"], ["4right", "wrong", "wrong", "wrong"]];
@@ -42,8 +53,8 @@ function choice1() {
         var answers = [["1right", "wrong", "wrong", "wrong"], ["2right", "wrong", "wrong", "wrong"], ["3right", "wrong", "wrong", "wrong"], ["4right", "wrong", "wrong", "wrong"]];
         let firstchoice = document.getElementById("first")
         console.log(firstchoice.textContent)
-        console.log(answers[n][0])
-        if (firstchoice.textContent == answers[n][0]) {
+        console.log(answers[i][0])
+        if (firstchoice.textContent == answers[i][0]) {
             document.getElementById("results").style.display = "block"
             document.getElementById("wl").textContent = "good job"
             scoresignal = true;
@@ -61,8 +72,8 @@ function choice2() {
         var answers = [["1right", "wrong", "wrong", "wrong"], ["2right", "wrong", "wrong", "wrong"], ["3right", "wrong", "wrong", "wrong"], ["4right", "wrong", "wrong", "wrong"]];
         let firstchoice = document.getElementById("second")
         console.log(firstchoice.textContent)
-        console.log(answers[n][0])
-        if (firstchoice.textContent == answers[n][0]) {
+        console.log(answers[i][0])
+        if (firstchoice.textContent == answers[i][0]) {
             document.getElementById("results").style.display = "block"
             document.getElementById("wl").textContent = "good job"
             scoresignal = true;
@@ -79,8 +90,8 @@ function choice3() {
         var answers = [["1right", "wrong", "wrong", "wrong"], ["2right", "wrong", "wrong", "wrong"], ["3right", "wrong", "wrong", "wrong"], ["4right", "wrong", "wrong", "wrong"]];
         let firstchoice = document.getElementById("third")
         console.log(firstchoice.textContent)
-        console.log(answers[n][0])
-        if (firstchoice.textContent == answers[n][0]) {
+        console.log(answers[i][0])
+        if (firstchoice.textContent == answers[i][0]) {
             document.getElementById("results").style.display = "block"
             document.getElementById("wl").textContent = "good job"
             scoresignal = true;
@@ -98,8 +109,8 @@ function choice4() {
         var answers = [["1right", "wrong", "wrong", "wrong"], ["2right", "wrong", "wrong", "wrong"], ["3right", "wrong", "wrong", "wrong"], ["4right", "wrong", "wrong", "wrong"]];
         let firstchoice = document.getElementById("fourth")
         console.log(firstchoice.textContent)
-        console.log(answers[n][0])
-        if (firstchoice.textContent == answers[n][0]) {
+        console.log(answers[i][0])
+        if (firstchoice.textContent == answers[i][0]) {
             document.getElementById("results").style.display = "block"
             document.getElementById("wl").textContent = "good job"
             scoresignal = true;
@@ -125,17 +136,40 @@ function nextquestion() {
         return endgame()
     }
     console.log(i)
+    newgame = false;
+    
     play()
 }
 
 function endgame(){
-    question.textContent="You're done bitch"
-    document.getElementById("list").style.display = "none"
-    window.alert(score)
+    stoptime = true;
+    secondsLeft = 10;
+    question.textContent="You're done bitch. Score: "+score;
+    document.getElementById("list").style.display = "none";
+    document.getElementById("username").style.display = "block"
     score = 0;
-    play();
-
+    newgame = true;
+    // play();
 }
+
+// function setTime() {
+//     // Sets interval in variable
+//     var timerInterval = setInterval(function() {
+//       secondsLeft--;
+//       timeEl.textContent = secondsLeft + " seconds left.";
+  
+//       if(secondsLeft === 0) {
+//         // Stops execution of action at set interval
+//         clearInterval(timerInterval);
+//         // Calls function to create and append image
+//         return endgame();
+//       }
+//       if(stoptime){
+//         return clearInterval(timerInterval)
+//       }
+  
+//     }, 1000);
+//   }
 
 
 
