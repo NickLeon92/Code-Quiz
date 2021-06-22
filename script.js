@@ -58,7 +58,7 @@ let check = true
 first.addEventListener("click", choice1)
 function choice1() {
         var answers = [["1right", "wrong", "wrong", "wrong"], ["2right", "wrong", "wrong", "wrong"], ["3right", "wrong", "wrong", "wrong"], ["4right", "wrong", "wrong", "wrong"]];
-        let firstchoice = document.getElementById("first")
+        let firstchoice = this
         console.log(firstchoice.textContent)
         console.log(answers[i][0])
         if (firstchoice.textContent == answers[i][0]) {
@@ -114,7 +114,7 @@ third.addEventListener("click", choice1)
 //     } 
 
 
-fourth.addEventListener("click", choice1)
+fourth.addEventListener("click", choice1 )
 // function choice4() {
 //         var answers = [["1right", "wrong", "wrong", "wrong"], ["2right", "wrong", "wrong", "wrong"], ["3right", "wrong", "wrong", "wrong"], ["4right", "wrong", "wrong", "wrong"]];
 //         let firstchoice = document.getElementById("fourth")
@@ -155,9 +155,11 @@ function nextquestion() {
 function endgame(){
     stoptime = true;
     secondsLeft = 30;
-    question.textContent="You're done. Score: " + score;
+    namedisplay.textContent="You're done. Score: " + score;
     document.getElementById("list").style.display = "none";
     document.getElementById("username").style.display = "block"
+    document.getElementById("question").style.display = "none"
+    scoredisplay = localStorage.getItem(score)
     // score = 0;
     newgame = true;
     // timeEl.style.display = "none"
@@ -193,6 +195,7 @@ function setTime() {
     let inputname = document.getElementById("name").value
     localStorage.setItem("finalscore", score)
     localStorage.setItem("namedisplay", inputname)
+    console.log(scoredisplay)
     document.getElementById("username").style.display = "none"
     document.getElementById("results").style.display = "none"
     document.getElementById("question").style.display = "none"
