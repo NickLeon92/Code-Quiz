@@ -6,6 +6,7 @@ var choices = document.querySelectorAll("li")
 document.getElementById("list").style.display = "none"
 document.getElementById("results").style.display = "none"
 document.getElementById("username").style.display = "none"
+document.getElementById("finalscore").style.display = "none"
 var question = document.getElementById("question")
 let n = Math.floor(Math.random() * questionarray.length);
 let score =0;
@@ -16,7 +17,8 @@ let newgame=true;
 var timeEl = document.getElementById("time")
 var secondsLeft = 30
 let stoptime = false;
-
+let namedisplay = document.getElementById("namedisplay")
+// let finalscore = document.getElementById("finalscore")
 
  
 playgame.addEventListener("click", play)
@@ -147,16 +149,17 @@ function nextquestion() {
     console.log(i)
     newgame = false;
     
-    play()
+    play() 
 }
 
 function endgame(){
     stoptime = true;
     secondsLeft = 30;
-    question.textContent="You're done. Score: " + score;
+    namedisplay.textContent="You're done. Score: " + score;
     document.getElementById("list").style.display = "none";
     document.getElementById("username").style.display = "block"
-    score = 0;
+    scoredisplay = localStorage.getItem(score)
+    // score = 0;
     newgame = true;
     // timeEl.style.display = "none"
     // play();
@@ -181,6 +184,27 @@ function setTime() {
   
     }, 1000);
   }
+
+
+
+  submitname.addEventListener("click", function(event) {
+    event.preventDefault();
+    // inputname = localStorage.getItem("name")
+    // localStorage.getItem(score)
+    let inputname = localStorage.getItem("name")
+    localStorage.setItem("finalscore",score)
+    console.log(scoredisplay)
+    document.getElementById("username").style.display = "none"
+    document.getElementById("results").style.display = "none"
+    document.getElementById("question").style.display = "none"
+    document.getElementById("finalscore").style.display = "block"
+    document.getElementById("namedisplay").style.display =  "block"
+    namedisplay.textContent = "testing"
+    finalscore.textContent = "final score: " + score;
+    score = 0;
+    // localStorage.setItem
+})
+
 
 
 
