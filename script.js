@@ -7,6 +7,7 @@ document.getElementById("list").style.display = "none"
 document.getElementById("results").style.display = "none"
 document.getElementById("username").style.display = "none"
 document.getElementById("finalscore").style.display = "none"
+document.getElementById("playagain").style.display = "none"
 var question = document.getElementById("question")
 let n = Math.floor(Math.random() * questionarray.length);
 let score =0;
@@ -26,7 +27,13 @@ var namelist=[];
 playgame.addEventListener("click", play)
 function play() { 
 
+    namelist=[];
+    var secondsLeft = 30;
+
     document.getElementById("playgame").style.display = "none";
+    document.getElementById("tester").style.display = "none"
+    document.getElementById("question").style.display = "block"
+    document.getElementById("time").style.display = "block"
     console.log(questionarray)
     console.log(i)
     console.log(answers[n])
@@ -48,6 +55,7 @@ function play() {
         stoptime = false;
         setTime()
     }
+    captureprevious()
 }
 
 
@@ -102,6 +110,7 @@ function endgame(){
     document.getElementById("list").style.display = "none";
     document.getElementById("username").style.display = "block"
     document.getElementById("question").style.display = "none"
+    document.getElementById("time").style.display = "none"
     // scoredisplay = localStorage.setItem(score)
     // score = 0;
     newgame = true;
@@ -144,10 +153,12 @@ function captureprevious() {
 }
 
 
-  
-
   submitname.addEventListener("click", function(event) {
-    var nametext = inputname.value.trim()
+      var nametext = inputname.value.trim()
+    if (nametext === "") {
+        // window.alert("enter a name pls")
+        return event;
+      }
     event.preventDefault();
     // localStorage.setItem("score",score)
     namelist.push(nametext + " - " + score)
@@ -161,12 +172,15 @@ function captureprevious() {
     document.getElementById("results").style.display = "none"
     document.getElementById("question").style.display = "none"
     document.getElementById("finalscore").style.display = "none"
-    document.getElementById("namedisplay").style.display =  "none"
+    document.getElementById("namedisplay").style.display =  "none "
     document.getElementById("tester").style.display = "block"
+    document.getElementById("playagain").style.display = "block"
     namedisplay.textContent = inputname
     finalscore.textContent = "final score: " + score;
     tester.textContent = localStorage.getItem("namelist")
+
     score = 0;
+    i=0;
     // localStorage.setItem
 })
 
@@ -174,4 +188,9 @@ function captureprevious() {
 reset.addEventListener("click", function(event) {
     localStorage.clear()
     tester.textContent = ""
+})
+
+playagain.addEventListener("click", function(event) {
+    play()
+    
 })
