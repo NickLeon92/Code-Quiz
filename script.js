@@ -18,15 +18,14 @@ var timeEl = document.getElementById("time")
 var secondsLeft = 30
 let stoptime = false;
 let namedisplay = document.getElementById("namedisplay")
+let inputname = document.querySelector("#name")
+var namelist=[];
 // let finalscore = document.getElementById("finalscore")
 
  
 playgame.addEventListener("click", play)
 function play() { 
-    // if (newgame){
-    //     newgame = false
-    //     var questionarray = ["1what does html stand for?", "2is joe biden a fascist?", "3wanna bomb the capitol?", "4I am sad"];
-    // }
+
     document.getElementById("playgame").style.display = "none";
     console.log(questionarray)
     console.log(i)
@@ -51,11 +50,15 @@ function play() {
     }
 }
 
-// var answers = [["1right", "wrong", "wrong", "wrong"], ["2right", "wrong", "wrong", "wrong"], ["3right", "wrong", "wrong", "wrong"], ["4right", "wrong", "wrong", "wrong"]];
-
-let check = true
 
 first.addEventListener("click", choice1)
+
+second.addEventListener("click", choice1)
+
+third.addEventListener("click", choice1)
+
+fourth.addEventListener("click", choice1 )
+
 function choice1() {
         var answers = [["1right", "wrong", "wrong", "wrong"], ["2right", "wrong", "wrong", "wrong"], ["3right", "wrong", "wrong", "wrong"], ["4right", "wrong", "wrong", "wrong"]];
         let firstchoice = this
@@ -74,68 +77,8 @@ function choice1() {
         nextquestion()
     } 
 
-
-second.addEventListener("click", choice1)
-// function choice2() {
-//         var answers = [["1right", "wrong", "wrong", "wrong"], ["2right", "wrong", "wrong", "wrong"], ["3right", "wrong", "wrong", "wrong"], ["4right", "wrong", "wrong", "wrong"]];
-//         let firstchoice = document.getElementById("second")
-//         console.log(firstchoice.textContent)
-//         console.log(answers[i][0])
-//         if (firstchoice.textContent == answers[i][0]) {
-//             document.getElementById("results").style.display = "block"
-//             document.getElementById("wl").textContent = "good job"
-//             scoresignal = true;
-//         }
-//         else {
-//             document.getElementById("results").style.display = "block"
-//             document.getElementById("wl").textContent = "you suck"
-//             timesignal = true;
-//         }
-//         nextquestion()
-//     }
-
-third.addEventListener("click", choice1)
-// function choice3() {
-//         var answers = [["1right", "wrong", "wrong", "wrong"], ["2right", "wrong", "wrong", "wrong"], ["3right", "wrong", "wrong", "wrong"], ["4right", "wrong", "wrong", "wrong"]];
-//         let firstchoice = document.getElementById("third")
-//         console.log(firstchoice.textContent)
-//         console.log(answers[i][0])
-//         if (firstchoice.textContent == answers[i][0]) {
-//             document.getElementById("results").style.display = "block"
-//             document.getElementById("wl").textContent = "good job"
-//             scoresignal = true;
-//         }
-//         else {
-//             document.getElementById("results").style.display = "block"
-//             document.getElementById("wl").textContent = "you suck"
-//             timesignal = true;
-//         }
-//         nextquestion();
-//     } 
-
-
-fourth.addEventListener("click", choice1 )
-// function choice4() {
-//         var answers = [["1right", "wrong", "wrong", "wrong"], ["2right", "wrong", "wrong", "wrong"], ["3right", "wrong", "wrong", "wrong"], ["4right", "wrong", "wrong", "wrong"]];
-//         let firstchoice = document.getElementById("fourth")
-//         console.log(firstchoice.textContent)
-//         console.log(answers[i][0])
-//         if (firstchoice.textContent == answers[i][0]) {
-//             document.getElementById("results").style.display = "block"
-//             document.getElementById("wl").textContent = "good job"
-//             scoresignal = true;
-//         }
-//         else {
-//             document.getElementById("results").style.display = "block"
-//             document.getElementById("wl").textContent = "you suck"
-//             timesignal = true;
-//         }
-//         nextquestion();
-//     } 
-
-
 function nextquestion() {
-    // var questionarray = ["1what does html stand for?", "2is joe biden a fascist?", "3wanna bomb the capitol?", "4I am sad"]; 
+    // var questionarray = ["1.what does html stand for?", "2.is joe biden a fascist?", "3.wanna bomb the capitol?", "4.I am sad"]; 
     // document.getElementById("results").style.display = "none"
     console.log(i)
     i++
@@ -159,7 +102,7 @@ function endgame(){
     document.getElementById("list").style.display = "none";
     document.getElementById("username").style.display = "block"
     document.getElementById("question").style.display = "none"
-    scoredisplay = localStorage.getItem(score)
+    // scoredisplay = localStorage.setItem(score)
     // score = 0;
     newgame = true;
     // timeEl.style.display = "none"
@@ -174,9 +117,9 @@ function setTime() {
       timeEl.textContent = secondsLeft + " seconds left.";
   
       if(secondsLeft === 0) {
-        // Stops execution of action at set interval
+        
         clearInterval(timerInterval);
-        // Calls function to create and append image
+        
         return endgame();
       }
       if(stoptime){
@@ -186,51 +129,49 @@ function setTime() {
     }, 1000);
   }
 
+  
+  
 
+  captureprevious()
+
+function captureprevious() {
+      var storednamelist = JSON.parse(localStorage.getItem("namelist"));
+    // var storednamelist = [document.getElementById("tester").textContent]
+    console.log(storednamelist)
+    if (storednamelist !== null) {
+        namelist = storednamelist;
+    }
+}
+
+
+  
 
   submitname.addEventListener("click", function(event) {
+    var nametext = inputname.value.trim()
     event.preventDefault();
+    // localStorage.setItem("score",score)
+    namelist.push(nametext + " - " + score)
+    localStorage.setItem("namelist", JSON.stringify(namelist));
+    // captureprevious()
     // inputname = localStorage.getItem("name")
     // localStorage.getItem(score)
-    let inputname = document.getElementById("name").value
-    localStorage.setItem("finalscore", score)
-    localStorage.setItem("namedisplay", inputname)
-    console.log(scoredisplay)
+    // let inputname = document.getElementById("name").value
+    // localStorage.setItem("namelist", namelist)
     document.getElementById("username").style.display = "none"
     document.getElementById("results").style.display = "none"
     document.getElementById("question").style.display = "none"
-    document.getElementById("finalscore").style.display = "block"
-    document.getElementById("namedisplay").style.display =  "block"
+    document.getElementById("finalscore").style.display = "none"
+    document.getElementById("namedisplay").style.display =  "none"
+    document.getElementById("tester").style.display = "block"
     namedisplay.textContent = inputname
     finalscore.textContent = "final score: " + score;
+    tester.textContent = localStorage.getItem("namelist")
     score = 0;
     // localStorage.setItem
 })
 
 
-
-
-
-
-    // console.log(questionarray)
-    // console.log(n)
-    // questionarray.splice(n,1)
-    // console.log(questionarray.length)
-    // console.log(questionarray)
-    // if (questionarray.length>2){
-    //     play()
-    // n = Math.floor(Math.random() * questionarray.length);
-    // }
-    // else if(questionarray.length<=2 && questionarray>0){
-    //     console.log("length2")
-    //     n=0
-    //     play()
-    // }
-    // else {
-    //     console.log("length???")
-    //     n = Math.floor(Math.random() * questionarray.length)
-    //     questionarray = ["1what does html stand for?", "2is joe biden a fascist?", "3wanna bomb the capitol?", "4I am sad"]; 
-    //     play()
-    // }
-    
- 
+reset.addEventListener("click", function(event) {
+    localStorage.clear()
+    tester.textContent = ""
+})
