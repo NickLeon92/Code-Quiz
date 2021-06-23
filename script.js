@@ -29,13 +29,26 @@ playgame.addEventListener("click", play)
 function play() { 
 
     namelist=[];
-    var secondsLeft = 30;
+    
 
     document.getElementById("playgame").style.display = "none";
     document.getElementById("tester").style.display = "none"
     document.getElementById("question").style.display = "block"
-    document.getElementById("time").style.display = "block"
     document.getElementById("scoreboard").style.display = "none"
+    document.getElementById("playagain").style.display = "none"
+    
+    scoresignal = false;
+    if(timesignal){
+      secondsLeft=secondsLeft-3;
+      (console.log(secondsLeft))
+    }
+    
+    if (newgame) {
+      stoptime = false;
+      setTime()
+    }
+    
+    document.getElementById("time").style.display = "block"
     console.log(questionarray)
     console.log(i)
     console.log(answers[n])
@@ -48,15 +61,7 @@ function play() {
     document.getElementById("third").textContent = answers[i][2];
     document.getElementById("fourth").textContent = answers[i][3];
     question.textContent = chosenq;
-    scoresignal = false;
-    if(timesignal){
-        secondsLeft=secondsLeft-3;
-    }
-
-    if (newgame) {
-        stoptime = false;
-        setTime()
-    }
+    
     captureprevious()
 }
 
@@ -106,8 +111,11 @@ function nextquestion() {
 }
 
 function endgame(){
+  console.log("UMMMMM")
     stoptime = true;
     secondsLeft = 30;
+    console.log(secondsLeft)
+    namedisplay.style.display= "block"
     namedisplay.textContent="You're done. Score: " + score;
     document.getElementById("list").style.display = "none";
     document.getElementById("username").style.display = "block"
@@ -123,20 +131,23 @@ function endgame(){
 function setTime() {
     // Sets interval in variable
     var timerInterval = setInterval(function() { 
-      secondsLeft--;
-   
-      timeEl.textContent = secondsLeft + " seconds left.";
-  
-      if(secondsLeft === 0) {
+      console.log(secondsLeft)
+      console.log(secondsLeft)
+      
+      if(secondsLeft <= 0) {
         
         clearInterval(timerInterval);
         
-        return endgame();
+        console.log("ummmm")
+        endgame();
       }
       if(stoptime){
         clearInterval(timerInterval)
+        
       }
-  
+      
+      timeEl.textContent = secondsLeft + " seconds(s) left.";
+      secondsLeft--;
     }, 1000);
   }
 
@@ -211,6 +222,11 @@ reset.addEventListener("click", function(event) {
 })
 
 playagain.addEventListener("click", function(event) {
-    play()
+  timesignal = false;
+  newgame = true
+  secondsLeft = 30;
+  play()
+    
+    console.log(secondsLeft)
     
 })
