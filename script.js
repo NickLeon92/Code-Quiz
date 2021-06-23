@@ -8,6 +8,7 @@ document.getElementById("results").style.display = "none"
 document.getElementById("username").style.display = "none"
 document.getElementById("finalscore").style.display = "none"
 document.getElementById("playagain").style.display = "none"
+var scoreboard = document.querySelector("#scoreboard")
 var question = document.getElementById("question")
 let n = Math.floor(Math.random() * questionarray.length);
 let score =0;
@@ -34,6 +35,7 @@ function play() {
     document.getElementById("tester").style.display = "none"
     document.getElementById("question").style.display = "block"
     document.getElementById("time").style.display = "block"
+    document.getElementById("scoreboard").style.display = "none"
     console.log(questionarray)
     console.log(i)
     console.log(answers[n])
@@ -120,7 +122,7 @@ function endgame(){
 
 function setTime() {
     // Sets interval in variable
-    var timerInterval = setInterval(function() {
+    var timerInterval = setInterval(function() { 
       secondsLeft--;
    
       timeEl.textContent = secondsLeft + " seconds left.";
@@ -156,8 +158,8 @@ function captureprevious() {
   submitname.addEventListener("click", function(event) {
       var nametext = inputname.value.trim()
     if (nametext === "") {
-        // window.alert("enter a name pls")
-        return event;
+        
+        nametext = "-------"
       }
     event.preventDefault();
     // localStorage.setItem("score",score)
@@ -177,17 +179,35 @@ function captureprevious() {
     document.getElementById("playagain").style.display = "block"
     namedisplay.textContent = inputname
     finalscore.textContent = "final score: " + score;
-    tester.textContent = localStorage.getItem("namelist")
+    tester.textContent = "HIGHSCORES"
+    render()
 
     score = 0;
     i=0;
     // localStorage.setItem
 })
 
+function render() {
+    // Clear todoList element and update todoCountSpan
+    scoreboard.innerHTML = "";
+    document.getElementById("scoreboard").style.display = "block"
+    // Render a new li for each todo
+    for (var i = 0; i < namelist.length; i++) {
+      var entry = namelist[i];
+  
+      var li = document.createElement("li");
+      li.textContent = entry
+      li.setAttribute("data-index", i);
+  
+      
+      scoreboard.appendChild(li);
+    }
+  }
+
 
 reset.addEventListener("click", function(event) {
     localStorage.clear()
-    tester.textContent = ""
+    scoreboard.textContent = "play again to save a score!"
 })
 
 playagain.addEventListener("click", function(event) {
