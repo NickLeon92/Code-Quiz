@@ -1,5 +1,7 @@
 // function main() {
 
+  let call = false;
+
 var questionarray = ["1what does html stand for?", "2is joe biden a fascist?", "3wanna bomb the capitol?", "4I am sad"];
 var answers = [["1right", "wrong", "wrong", "wrong"], ["2right", "wrong", "wrong", "wrong"], ["3right", "wrong", "wrong", "wrong"], ["4right", "wrong", "wrong", "wrong"]];
 var choices = document.querySelectorAll("li")
@@ -8,6 +10,7 @@ document.getElementById("results").style.display = "none"
 document.getElementById("username").style.display = "none"
 document.getElementById("finalscore").style.display = "none"
 document.getElementById("playagain").style.display = "none"
+document.getElementById("view").style.display = "none"
 var scoreboard = document.querySelector("#scoreboard")
 var question = document.getElementById("question")
 let n = Math.floor(Math.random() * questionarray.length);
@@ -22,11 +25,13 @@ let stoptime = false;
 let namedisplay = document.getElementById("namedisplay")
 let inputname = document.querySelector("#name")
 var namelist=[];
+
 // let finalscore = document.getElementById("finalscore")
 
  
 playgame.addEventListener("click", play)
 function play() {
+  document.getElementById("view").style.display = "block"
   document.getElementById("instructions").style.display = "none"
   document.getElementById("remove").style.display = "none"
 
@@ -75,6 +80,7 @@ third.addEventListener("click", choice1)
 fourth.addEventListener("click", choice1 )
 
 function choice1() {
+  // this.style.backgroundcolor = "white"
         var answers = [["1right", "wrong", "wrong", "wrong"], ["2right", "wrong", "wrong", "wrong"], ["3right", "wrong", "wrong", "wrong"], ["4right", "wrong", "wrong", "wrong"]];
         let firstchoice = this
         console.log(firstchoice.textContent)
@@ -113,6 +119,7 @@ function nextquestion() {
 function endgame(){
   console.log("UMMMMM")
     stoptime = true;
+    call =true
     secondsLeft = 30;
     console.log(secondsLeft)
     namedisplay.style.display= "block"
@@ -162,6 +169,7 @@ function captureprevious() {
     console.log(storednamelist)
     if (storednamelist !== null) {
         namelist = storednamelist;
+        console.log(namelist)
     }
 }
 
@@ -201,10 +209,31 @@ function captureprevious() {
 function render() {
     // Clear todoList element and update todoCountSpan
     scoreboard.innerHTML = "";
+    stoptime = true;
+    newgame = true;
+
+    document.getElementById("view").style.display = "none"
+    document.getElementById("list").style.display = "none";
+    document.getElementById("question").style.display = "none"
+    document.getElementById("time").style.display = "none"
+    document.getElementById("playagain").style.display = "none"
+    if (call){
+      document.getElementById("playagain").style.display = "block"
+    }
+    else{
+      document.getElementById("playagain").style.display = "none"
+    }
+    // document.getElementById("playagain").style.display = "block"
+    tester.textContent = "HIGHSCORES"
+    console.log(namelist.length)
     document.getElementById("scoreboard").style.display = "block"
     // Render a new li for each todo
+    if(namelist.length===0){
+      scoreboard.textContent = "no scores tracked"
+    }
     for (var i = 0; i < namelist.length; i++) {
       var entry = namelist[i];
+      console.log("test2")
   
       var li = document.createElement("li");
       li.textContent = entry
@@ -214,17 +243,28 @@ function render() {
       scoreboard.appendChild(li);
     }
   }
+render()
+view.addEventListener("click",callhs)
+function callhs(){
+  document.getElementById("tester").style.display ="block"
+  tester.textContent = "HIGHSCORES"
+  call =true
+  render()
+}
 
 
 reset.addEventListener("click", function(event) {
     localStorage.clear()
+    namelist = []
     scoreboard.textContent = "play again to save a score!"
+    console.log(namelist)
 })
 
 playagain.addEventListener("click", function(event) {
   timesignal = false;
   newgame = true
   secondsLeft = 30;
+  i=0;
   play()
     
     console.log(secondsLeft)
