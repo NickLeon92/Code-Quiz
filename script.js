@@ -96,6 +96,7 @@ function choice1() {
             timesignal = true;
         }
         nextquestion()
+        resultfade()
     } 
 
 function nextquestion() {
@@ -270,3 +271,11 @@ playagain.addEventListener("click", function(event) {
     console.log(secondsLeft)
     
 })
+
+function resultfade(){
+
+var a = setInterval(function(){
+  clearInterval(a)
+   document.getElementById("results").style.display = "none" }, 2000)
+
+}
