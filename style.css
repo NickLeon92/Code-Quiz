@@ -1,0 +1,21 @@
+.body{
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.list-group {
+    margin-left: 50px;
+    max-width: 200px;
+}
+
+.list-group-item:hover{
+    background-color: aqua;
+    transition: all .3s ease-in-out;
+}
+.jumbotron{
+    justify-content: center;
+}
+
+#playagain {
+    margin-bottom: 15px;
+}

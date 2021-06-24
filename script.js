@@ -26,43 +26,43 @@ var namelist=[];
 
  
 playgame.addEventListener("click", play)
-function play() { 
+function play() {
+  document.getElementById("instructions").style.display = "none"
+  document.getElementById("remove").style.display = "none"
 
-    namelist=[];
-    
+  namelist = [];
+  document.getElementById("playgame").style.display = "none";
+  document.getElementById("tester").style.display = "none"
+  document.getElementById("question").style.display = "block"
+  document.getElementById("scoreboard").style.display = "none"
+  document.getElementById("playagain").style.display = "none"
 
-    document.getElementById("playgame").style.display = "none";
-    document.getElementById("tester").style.display = "none"
-    document.getElementById("question").style.display = "block"
-    document.getElementById("scoreboard").style.display = "none"
-    document.getElementById("playagain").style.display = "none"
-    
-    scoresignal = false;
-    if(timesignal){
-      secondsLeft=secondsLeft-3;
-      (console.log(secondsLeft))
-    }
-    
-    if (newgame) {
-      stoptime = false;
-      setTime()
-    }
-    
-    document.getElementById("time").style.display = "block"
-    console.log(questionarray)
-    console.log(i)
-    console.log(answers[n])
-    chosenq = questionarray[i];
-    answers[i] = answers[i].sort(() => Math.random() - 0.5);
-    console.log(answers[n])
-    document.getElementById("list").style.display = "block";
-    document.getElementById("first").textContent = answers[i][0];
-    document.getElementById("second").textContent = answers[i][1];
-    document.getElementById("third").textContent = answers[i][2];
-    document.getElementById("fourth").textContent = answers[i][3];
-    question.textContent = chosenq;
-    
-    captureprevious()
+  scoresignal = false;
+  if (timesignal) {
+    secondsLeft = secondsLeft - 3;
+    (console.log(secondsLeft))
+  }
+
+  if (newgame) {
+    stoptime = false;
+    setTime()
+  }
+
+  document.getElementById("time").style.display = "block"
+  console.log(questionarray)
+  console.log(i)
+  console.log(answers[n])
+  chosenq = questionarray[i];
+  answers[i] = answers[i].sort(() => Math.random() - 0.5);
+  console.log(answers[n])
+  document.getElementById("list").style.display = "block";
+  document.getElementById("first").textContent = answers[i][0];
+  document.getElementById("second").textContent = answers[i][1];
+  document.getElementById("third").textContent = answers[i][2];
+  document.getElementById("fourth").textContent = answers[i][3];
+  question.textContent = chosenq;
+
+  captureprevious()
 }
 
 
@@ -124,7 +124,7 @@ function endgame(){
     // scoredisplay = localStorage.setItem(score)
     // score = 0;
     newgame = true;
-    // timeEl.style.display = "none"
+    // timeEl.style.displ ay = "none"
     // play();
 }
 
