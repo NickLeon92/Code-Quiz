@@ -25,12 +25,15 @@ let stoptime = false;
 let namedisplay = document.getElementById("namedisplay")
 let inputname = document.querySelector("#name")
 var namelist=[];
+let wait = 0;
+let t = true
 
 // let finalscore = document.getElementById("finalscore")
 
  
 playgame.addEventListener("click", play)
 function play() {
+  wait = 0
   document.getElementById("view").style.display = "block"
   document.getElementById("instructions").style.display = "none"
   document.getElementById("remove").style.display = "none"
@@ -45,7 +48,7 @@ function play() {
   scoresignal = false;
   if (timesignal) {
     secondsLeft = secondsLeft - 3;
-    (console.log(secondsLeft))
+    // (console.log(secondsLeft))
   }
 
   if (newgame) {
@@ -54,12 +57,12 @@ function play() {
   }
 
   document.getElementById("time").style.display = "block"
-  console.log(questionarray)
-  console.log(i)
-  console.log(answers[n])
+  // console.log(questionarray)
+  // console.log(i)
+  // console.log(answers[n])
   chosenq = questionarray[i];
   answers[i] = answers[i].sort(() => Math.random() - 0.5);
-  console.log(answers[n])
+  // console.log(answers[n])
   document.getElementById("list").style.display = "block";
   document.getElementById("first").textContent = answers[i][0];
   document.getElementById("second").textContent = answers[i][1];
@@ -81,48 +84,78 @@ fourth.addEventListener("click", choice1 )
 
 function choice1() {
   // this.style.backgroundcolor = "white"
-        var answers = [["1right", "wrong", "wrong", "wrong"], ["2right", "wrong", "wrong", "wrong"], ["3right", "wrong", "wrong", "wrong"], ["4right", "wrong", "wrong", "wrong"]];
-        let firstchoice = this
-        console.log(firstchoice.textContent)
-        console.log(answers[i][0])
-        if (firstchoice.textContent == answers[i][0]) {
-            document.getElementById("results").style.display = "block"
-            document.getElementById("wl").textContent = "good job"
-            scoresignal = true;
-        }
-        else {
-            document.getElementById("results").style.display = "block"
-            document.getElementById("wl").textContent = "you suck"
-            timesignal = true;
-        }
-        nextquestion()
-        resultfade()
-    } 
+  var answers = [["1right", "wrong", "wrong", "wrong"], ["2right", "wrong", "wrong", "wrong"], ["3right", "wrong", "wrong", "wrong"], ["4right", "wrong", "wrong", "wrong"]];
+  let firstchoice = this
+  
+  // console.log(firstchoice.textContent)
+  // console.log(answers[i][0])
+  if (firstchoice.textContent == answers[i][0]) {
+    document.getElementById("results").style.display = "block"
+    document.getElementById("wl").textContent = "good job"
+    scoresignal = true;
+  }
+  else {
+    document.getElementById("results").style.display = "block"
+    document.getElementById("wl").textContent = "you suck"
+    timesignal = true;
+  }
+  
+  // clearInterval(idk)
+  // var idk = setInterval(hide,2000)
+  // function hide(){
+  //   document.getElementById("results").style.display = "none"
+  //   console.log("TICK")
+  //   clearInterval(idk)
+  // }
+    
+    
+  
+  
+  nextquestion()
+}
 
 function nextquestion() {
     // var questionarray = ["1.what does html stand for?", "2.is joe biden a fascist?", "3.wanna bomb the capitol?", "4.I am sad"]; 
     // document.getElementById("results").style.display = "none"
-    console.log(i)
+    // console.log(i)
     i++
+    wait = 0;
+    var idk = setInterval(hide,100)
+    function hide(){
+      if(wait>20){
+        document.getElementById("results").style.display = "none"
+        wait = 0
+        t = true
+        console.log("DONE")
+        clearInterval(idk)
+      }
+      wait++
+      console.log(wait)
+    }
+    if(!t){
+    clearInterval(idk)
+    }
+    t = false
+    
     if(scoresignal){
-        score++
+      score++
     }
     if(i==4){
-        i=0;
-        return endgame()
+      i=0;
+      return endgame()
     }
-    console.log(i)
+    // console.log(i)
     newgame = false;
     
     play() 
 }
 
 function endgame(){
-  console.log("UMMMMM")
+  // console.log("UMMMMM")
     stoptime = true;
     call =true
     secondsLeft = 30;
-    console.log(secondsLeft)
+    // console.log(secondsLeft)
     namedisplay.style.display= "block"
     namedisplay.textContent="You're done. Score: " + score;
     document.getElementById("list").style.display = "none";
@@ -139,14 +172,14 @@ function endgame(){
 function setTime() {
     // Sets interval in variable
     var timerInterval = setInterval(function() { 
-      console.log(secondsLeft)
-      console.log(secondsLeft)
+      // console.log(secondsLeft)
+      // console.log(secondsLeft)
       
       if(secondsLeft <= 0) {
         
         clearInterval(timerInterval);
         
-        console.log("ummmm")
+        // console.log("ummmm")
         endgame();
       }
       if(stoptime){
@@ -167,10 +200,10 @@ function setTime() {
 function captureprevious() {
       var storednamelist = JSON.parse(localStorage.getItem("namelist"));
     // var storednamelist = [document.getElementById("tester").textContent]
-    console.log(storednamelist)
+    // console.log(storednamelist)
     if (storednamelist !== null) {
         namelist = storednamelist;
-        console.log(namelist)
+        // console.log(namelist)
     }
 }
 
@@ -212,6 +245,7 @@ function render() {
     scoreboard.innerHTML = "";
     stoptime = true;
     newgame = true;
+    score =0;
 
     document.getElementById("view").style.display = "none"
     document.getElementById("list").style.display = "none";
@@ -226,7 +260,7 @@ function render() {
     }
     // document.getElementById("playagain").style.display = "block"
     tester.textContent = "HIGHSCORES"
-    console.log(namelist.length)
+    // console.log(namelist.length)
     document.getElementById("scoreboard").style.display = "block"
     // Render a new li for each todo
     if(namelist.length===0){
@@ -234,7 +268,7 @@ function render() {
     }
     for (var i = 0; i < namelist.length; i++) {
       var entry = namelist[i];
-      console.log("test2")
+      // console.log("test2")
   
       var li = document.createElement("li");
       li.textContent = entry
@@ -258,7 +292,7 @@ reset.addEventListener("click", function(event) {
     localStorage.clear()
     namelist = []
     scoreboard.textContent = "play again to save a score!"
-    console.log(namelist)
+    // console.log(namelist)
 })
 
 playagain.addEventListener("click", function(event) {
@@ -268,14 +302,6 @@ playagain.addEventListener("click", function(event) {
   i=0;
   play()
     
-    console.log(secondsLeft)
+    // console.log(secondsLeft)
     
 })
-
-function resultfade(){
-
-var a = setInterval(function(){
-  clearInterval(a)
-   document.getElementById("results").style.display = "none" }, 2000)
-
-}

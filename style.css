@@ -8,7 +8,7 @@
     max-width: 200px;
 }
 
-.list-group-item:hover{
+.list-group-item:active{
     background-color: aqua;
     transition: all .3s ease-in-out;
 }
