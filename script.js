@@ -245,7 +245,6 @@ function render() {
     scoreboard.innerHTML = "";
     stoptime = true;
     newgame = true;
-    score =0;
 
     document.getElementById("view").style.display = "none"
     document.getElementById("list").style.display = "none";
@@ -300,6 +299,7 @@ playagain.addEventListener("click", function(event) {
   newgame = true
   secondsLeft = 30;
   i=0;
+  score =0;
   play()
     
     // console.log(secondsLeft)
