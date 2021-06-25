@@ -187,7 +187,7 @@ function setTime() {
         
       }
       
-      timeEl.textContent = secondsLeft + " seconds(s) left.";
+      timeEl.textContent = secondsLeft + " second(s) left!";
       secondsLeft--;
     }, 1000);
   }
