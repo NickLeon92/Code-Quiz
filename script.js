@@ -98,7 +98,7 @@ function choice1() {
   else {
     document.getElementById("results").style.display = "block"
     document.getElementById("results").style.color = "red"
-    document.getElementById("wl").textContent = "you suck"
+    document.getElementById("wl").textContent = "wrong"
     timesignal = true;
   }
   
