@@ -2,8 +2,8 @@
 
   let call = false;
 
-var questionarray = ["1what does html stand for?", "2is joe biden a fascist?", "3wanna bomb the capitol?", "4I am sad"];
-var answers = [["1right", "wrong", "wrong", "wrong"], ["2right", "wrong", "wrong", "wrong"], ["3right", "wrong", "wrong", "wrong"], ["4right", "wrong", "wrong", "wrong"]];
+var questionarray = ["1. What does html stand for?", "2. Where would you reference an external CSS stylesheet in the htlml file?", "3. Which element would you use to create a numbered list of items?", "4. Which javascript  method adds one or more elements to the end of an array?", "5. How would you call the value stored in following: storage.setItem(keyName, keyValue);"];
+var answers = [["HyperText Markup Language", "HelperText Marker Language", "HyperText Matrix Language", "HelperText Meter Letter"], ["<head>", "<body>", "anywhere", "an element attribute"], ["<ol>", "<ul>", "<header>", "<aside>"], [".push()", ".splice()", ".join()", ".pop()"], ["getItem(keyName)", "getItem(keyValue)", "getElementbyID(keyName)", "getAttribute(keyName)"]];
 var choices = document.querySelectorAll("li")
 document.getElementById("list").style.display = "none"
 document.getElementById("results").style.display = "none"
@@ -84,18 +84,20 @@ fourth.addEventListener("click", choice1 )
 
 function choice1() {
   // this.style.backgroundcolor = "white"
-  var answers = [["1right", "wrong", "wrong", "wrong"], ["2right", "wrong", "wrong", "wrong"], ["3right", "wrong", "wrong", "wrong"], ["4right", "wrong", "wrong", "wrong"]];
+  var answers = [["HyperText Markup Language", "HelperText Marker Language", "HyperText Matrix Language", "HelperText Meter Letter"], ["<head>", "<body>", "anywhere", "an element attribute"], ["<ol>", "<ul>", "<header>", "<aside>"], [".push()", ".splice()", ".join()", ".pop()"], ["getItem(keyName)", "getItem(keyValue)", "getElementbyID(keyName)", "getAttribute(keyName)"]];
   let firstchoice = this
   
   // console.log(firstchoice.textContent)
   // console.log(answers[i][0])
   if (firstchoice.textContent == answers[i][0]) {
     document.getElementById("results").style.display = "block"
+    document.getElementById("results").style.color = "green"
     document.getElementById("wl").textContent = "good job"
     scoresignal = true;
   }
   else {
     document.getElementById("results").style.display = "block"
+    document.getElementById("results").style.color = "red"
     document.getElementById("wl").textContent = "you suck"
     timesignal = true;
   }
@@ -140,7 +142,7 @@ function nextquestion() {
     if(scoresignal){
       score++
     }
-    if(i==4){
+    if(i==5){
       i=0;
       return endgame()
     }
