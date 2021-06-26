@@ -43,3 +43,7 @@
 #username {
     margin-left: 20px;
 }
+
+#name {
+    max-width: 500px;
+}

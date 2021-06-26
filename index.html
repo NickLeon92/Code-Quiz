@@ -44,13 +44,22 @@
         <h1 id = "wl"></h1>
 
     </aside>
-    
+<!--     
     <form id="username" method="POST">
         <div>
           <label for="name">name</label>
           <input type="text" name="name" id="name" placeholder="your name here" />
         </div>
         <button id="submitname">submit</button>
+      </form> -->
+
+      <form id="username" method="POST">
+        <div class="form-group">
+          <label for="exampleInputEmail1">Please Enter Your Name</label>
+          <input type="text" class="form-control" name="name" id="name" placeholder="your name here" aria-describedby="name">
+          <small id="emailHelp" class="form-text text-muted">Thanks for playing!</small>
+        </div>
+        <button id="submitname" type="submit" class="btn btn-primary">Submit</button>
       </form>
 
     <h1 id="time" style="text-align:center;"></h1>

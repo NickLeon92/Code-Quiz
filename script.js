@@ -122,7 +122,7 @@ function nextquestion() {
     wait = 0;
     var idk = setInterval(hide,100)
     function hide(){
-      if(wait>20){
+      if(wait>10){
         document.getElementById("results").style.display = "none"
         wait = 0
         t = true
